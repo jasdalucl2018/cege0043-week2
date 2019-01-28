@@ -79,7 +79,15 @@ function onMapClick(e) {
 mymap.on('click', onMapClick);
 
 
-
+// javascript modified to create custom icon marker
+var testMarkerPink = L.AwesomeMarkers.icon({ 
+	con: 'play',
+	markerColor: 'pink' });
+// load map
+var mymap = L.map('mapid').setView([51.505, -0.09], 13)
+// load tiles
 </script>
 </body>
 </html>
+
+
