@@ -8,7 +8,9 @@ This Map was created by Jason Dalrymple on 24th January 2019 for UCL Practical
 
 <link rel="stylesheet" href="ionicons.min.css">
 
-<link rel="stylesheet" href="leaflet.awesome-markers.css"> <script src="leaflet.awesome-markers.js"></script>
+<link rel="stylesheet" href="leaflet.awesome-markers.css"> 
+
+<script src="leaflet.awesome-markers.js"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
 
@@ -59,12 +61,25 @@ var geojsonFeature = {
 	"coordinates": [-0.133509, 51.524661]
 } 
 };
+
+
+// javascript modified to create custom icon marker
+
+var testMarkerPink = L.AwesomeMarkers.icon({ 
+	con: 'play',
+	markerColor: 'pink' });
+
 // and add it to the map 
-L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
 
-// create a custom popup 
 
-var popup = L.popup();
+/// ----GHeoJon code 
+
+
+L.geoJSON(geojsonFeature,
+{PointToLayer:function (feature, lating){
+	return L.marker(lating,{icon"testMarkerPink})}}).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>"):
+
+		var popup = L.popup();
 
 // create an event detector to wait for the user's click event and then use the popup to show  themw here they clicked // note that you don't need to do any complicated maths to convert screen coordinates to real world coordiantes - the Leaflet API does this for you 
 
@@ -79,13 +94,11 @@ function onMapClick(e) {
 mymap.on('click', onMapClick);
 
 
-// javascript modified to create custom icon marker
-var testMarkerPink = L.AwesomeMarkers.icon({ 
-	con: 'play',
-	markerColor: 'pink' });
+
+
 // load map
 var mymap = L.map('mapid').setView([51.505, -0.09], 13)
-// load tiles
+
 </script>
 </body>
 </html>
