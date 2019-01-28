@@ -14,12 +14,11 @@ crossorigin=""></script>
 <style type="text/css">
 #mapid { height: 180px; } 
 
-
-// create variable that will hold the XMLHttpRequest() - this must be done outside function so that all the functions ues the same variable 
+// create a variable that will hold the XMLHttpRequest() - this must be done outside a function so that all the functions can use the same variable 
 
 var client;
 
-﻿// and variable that will hold the layer itself – we need to do this outside the function so that we can use it to remove the layer later on 
+// and a variable that will hold the layer itself – we need to do this outside the function so that we can use it to remove the layer later on 
 
 var earthquakelayer;
 
@@ -48,9 +47,7 @@ function loadEarthquakelayer(earthquakedata) { // convert the text to JSON var e
 </script>
 
 
-
-
-
+</script>
 
 </style>
 </head> 
@@ -70,9 +67,19 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 	maxZoom: 18, 
 	attribution: 'Map data &copy; <ahref="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>', id: 'mapbox.streets' 
 
+
+
 }).addTo(mymap); 
+
+
+// add reference to earthquake data
+
+
+document.addEventListener('DOMContentLoaded', function() { getEarthquakes(); }, false);
 
 </script>
 </body>
 </html>
+
+
 
