@@ -1,9 +1,6 @@
 <html> 
 <head>
 
-This Map was created by Jason Dalrymple on 24th January 2019. 
-[leafletGeoJSON2 V1]
-
 
 
 
@@ -21,11 +18,67 @@ crossorigin=""></script>
 
 
 <script>
+
 	
 function loadEarthquakeData() {
-	alert("load the data here")
+
+	// call getEarthquake code
+	// keep alert messages so we klnow something is happening 
+
+	alert("Loading Eathquakes")
+	getEarthquake():
 }
 
+// create variable to hold XMLHTTP request() - this must be done outside a function so that all the functions can use the same variable
+
+var client;
+
+// create code to get the earthquake data using XLHttpsRequest
+
+function getEarthquakes(){
+	client = new XMLHTTPRequest();
+
+
+client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+client.onreadystatechange=earthquakeResponse:
+
+// note dont use earthquakeresponse() - ie with brackets as this wont work
+
+client.send();
+
+}
+
+// create the code to wait for the response from the data server, and process the response once it has been received.
+
+function earthquakeResponse(){
+
+
+// this last function listens out for the server to say that the code is ready ie has a steady state of 4
+
+// once data is ready then process data
+
+if (client.readyState ==4) {
+	var earthquakedata = client.responseText;
+	loadEarthquakeLayer(earthquakedata);
+}
+}
+
+// convert received data - which is text - to json fromat and add to map
+
+function loadEarthquakeLayer(earthquakedata){
+
+	// convert tesk to JSON
+
+	var earthquakedata =JSON.parse(earthquakedata);
+
+	// add JSON layer onto the map using default icons
+
+	earthquakelayer=L.geojson(earthquakejson).addTo(mymap);
+
+	// change the map zoom so that all data is shown
+
+	mymap.fitBounds(earthquakelayer.getBounds());
+}
 
 </script>>
 
