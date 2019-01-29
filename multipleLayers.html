@@ -16,7 +16,30 @@ crossorigin=""></script>
 <!-- button activation -->
 <script>
 	function loadEarthquakeData() {
-alert("load the data here");
+alert("Loading Earthquakes");
+getEarthquakes();
+}
+// create a variable that will hold the XMLHttpRequest()
+var client;
+function getEarthquakes() {
+	client = new XMLHttpRequest();
+	client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+client.onreadystatechange = earthquakeResponse;
+client.send();
+}
+// code to wait for the response from the data server, and process the response once it is received
+// this function listens out for the server to say that the data is ready
+function earthquakeResponse() {
+	if (client.readyState == 4) {
+		var earthquakedata = client.responseText;
+		loadEarthquakelayer(earthquakedata);
+		}
+}
+// convert the received data - which is text - to JSON format and add it to the map
+function loadEarthquakelayer(earthquakedata) {
+	var earthquakejson = JSON.parse(earthquakedata);
+	earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
+	mymap.fitBounds(earthquakelayer.getBounds());
 }
 </script>
 </head>
