@@ -29,6 +29,51 @@ attribution: 'Map data &copy;<a href="http://openstreetmap.org">OpenStreetMap</a
 '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,'+'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 id: 'mapbox.streets'
 }).addTo(mymap);
+
+
+// process for bulk adding GeoJSON data to leaflet ----
+
+// adding variable that holds a XMLHttpRequest()
+var client;
+// and a variable that will hold the layer itself
+
+var earthquakelayer;
+// create function to get Earthquakes data using an XMLHttpRequest
+
+function getEarthquakes() {
+	client = new XMLHttpRequest();
+	client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+client.onreadystatechange = earthquakeResponse;
+client.send();
+}
+
+// code to wait for the response from the data server, and process the response once it is received
+
+function earthquakeResponse() {
+	if (client.readyState == 4) {
+		var earthquakedata = client.responseText;
+		loadEarthquakelayer(earthquakedata);
+	}
+}
+
+// define a global variable to hold the layer so that we can use it later on
+
+var earthquakelayer;
+
+// convert the received data - which is text - to JSON format and add it to the map
+
+function loadEarthquakelayer(earthquakedata) {
+	var earthquakejson = JSON.parse(earthquakedata);
+	earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
+	mymap.fitBounds(earthquakelayer.getBounds());
+}
+
+// allows for asynchronous request
+
+document.addEventListener('DOMContentLoaded', function() {
+getEarthquakes();
+}, false);
+
 </script>
 </body>
 </html>
