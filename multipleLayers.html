@@ -42,8 +42,10 @@ function loadEarthquakelayer(earthquakedata) {
 	mymap.fitBounds(earthquakelayer.getBounds());
 }
 // second button activation
+var earthquakelayer;
 function removeEarthquakeData() {
-	alert("remove the earthquake data here");
+	alert("Earthquake data will be removed");
+	mymap.removeLayer( earthquakelayer );
 }
 </script>
 </head>
