@@ -59,6 +59,24 @@ function loadEarthquakelayer(earthquakedata) {
 	earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
 	mymap.fitBounds(earthquakelayer.getBounds());
 }
+// adding custom icons
+var earthquakelayer;
+function loadEarthquakelayer(earthquakedata) {
+	var earthquakejson = JSON.parse(earthquakedata );
+	earthquakelayer = L.geoJson(earthquakejson,
+{
+	pointToLayer: function (feature, latlng)
+	{
+		if (feature.properties.mag > 1.5) {
+			return L.marker(latlng, {icon:testMarkerRed}).bindPopup("<b>"+feature.properties.place+"</b>");
+			}
+else {
+	return L.marker(latlng, {icon:testMarkerPink}).bindPopup("<b>"+feature.properties.place+"</b>");;
+	}
+},
+}).addTo(mymap);
+mymap.fitBounds(earthquakelayer.getBounds());
+}
 // allows for asynchronous request
 document.addEventListener('DOMContentLoaded', function() {
 getEarthquakes();
