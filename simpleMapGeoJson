@@ -1,3 +1,4 @@
+<
 <html> 
 <head>
 
@@ -34,7 +35,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 // create a geoJSON feature - var 
 geojsonFeature = { "type": "Feature", "properties": { "name": "London", "popupContent": "This is where UCL is based"
 },
-"geometry": { "type": "Point", "coordinates": [-0.118092, 51.509865]
+"geometry": { "type": "Point", "coordinates": [-0.133800, 51.524541]
 } };
 // and add it to the map 
 L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
