@@ -60,6 +60,15 @@ function loadEarthquakelayer(earthquakedata) {
 document.addEventListener('DOMContentLoaded', function() {
 getEarthquakes();
 }, false);
+// adding custom marker
+var testMarkerRed = L.AwesomeMarkers.icon({
+icon: 'play',
+markerColor: 'red'
+});
+var testMarkerPink = L.AwesomeMarkers.icon({
+icon: 'play',
+markerColor: 'pink'
+});
 </script>
 </body>
 </html>
